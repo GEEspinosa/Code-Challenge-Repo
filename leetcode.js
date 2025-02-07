@@ -124,3 +124,41 @@ var canPlaceFlowers = function(flowerbed, n) {
   }
 
 };
+
+
+//345 . Reverse Vowels of a String - easy Feb.7, 2025
+
+// Given a string s, reverse only all the vowels in the string and return it.
+// The vowels are 'a', 'e', 'i', 'o', and 'u', 
+// and they can appear in both lower and upper cases, more than once.
+
+var reverseVowels = function(s) {
+
+  let arr = s.split('');
+
+  let result = []
+  let queue = []
+
+  for (let i = 0 ; i < arr.length ; i++ ) {
+      let check = arr[i].toLowerCase()
+      if (check === 'a' || check ===  'e' || check === 'i' || check === 'o' || check === 'u') {
+          queue.push(arr[i])
+          continue
+      } else {
+          continue
+      }
+  }
+
+  for (let i = 0 ; i < arr.length ; i++ ) {
+      let check = arr[i].toLowerCase()
+
+      if (check === 'a' || check ===  'e' || check === 'i' || check === 'o' || check === 'u') {
+          let element = queue.pop()
+          result.push(element)
+      } else {
+          result.push(arr[i])
+      }
+  }
+
+  return result.join('')
+};
