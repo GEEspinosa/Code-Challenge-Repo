@@ -163,7 +163,7 @@ var reverseVowels = function(s) {
   return result.join('')
 };
 
-// 151 . Reverse Words in a String - easy Feb. 9, 2025
+// 151 . Reverse Words in a String - medium Feb. 9, 2025
 
 //Given an input string s, reverse the order of the words.
 
@@ -187,4 +187,63 @@ var reverseWords = function(s) {
   }
 
   return result.join(' ')
+};
+
+
+// 238 . Product of Array Except Self
+
+// Given an integer array nums, return an array answer such that answer[i] 
+// is equal to the product of all the elements of nums except nums[i].
+// The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+// You must write an algorithm that runs in O(n)
+// time and without using the division operation.
+
+// dev note: below is ai solution from google.
+
+
+var productExceptSelf = function(nums) {
+  const n = nums.length;
+  const result = [];
+  let product = 1;
+
+  for ( let i = 0 ; i < n ; i++ ) {
+      result[i] = product;
+      product *= nums[i]
+  }
+
+  product = 1 
+
+  for (let i = n - 1 ; i >= 0 ; i-- ) {
+      result[i] *= product
+      product *= nums[i]
+  }
+
+  return result
+};
+
+// dev note: this uses the "prefix and suffix" strategy more explicitly, 
+// but really doing the same thing as above but with three arrays and loops.
+
+var productExceptSelf = function(nums) {
+    
+  const n = nums.length;
+  const prefixProducts = new Array(n);
+  const suffixProducts = new Array(n);
+  const result = new Array(n);
+
+  prefixProducts[0] = 1;
+  for (let i = 1; i < n; i++) {
+    prefixProducts[i] = prefixProducts[i - 1] * nums[i - 1];
+  }
+
+  suffixProducts[n - 1] = 1;
+  for (let i = n - 2; i >= 0; i--) {
+    suffixProducts[i] = suffixProducts[i + 1] * nums[i + 1];
+  }
+
+  for (let i = 0; i < n; i++) {
+    result[i] = prefixProducts[i] * suffixProducts[i];
+  }
+
+  return result;
 };
