@@ -247,3 +247,29 @@ var productExceptSelf = function(nums) {
 
   return result;
 };
+
+
+// 334 . Increasing Triplet Subsequence - medium Feb. 11, 2025
+
+// Given an integer array nums, return true if there exists a triple of indices (i, j, k) 
+// such that i < j < k and nums[i] < nums[j] < nums[k]. 
+// If no such indices exists, return false.
+
+var increasingTriplet = function(nums) {
+  let first = Infinity
+  let middle = Infinity
+
+  for (let num of nums) {
+      if (num > middle) {
+          return true
+      }
+      if (num <= first) {
+          first = num
+      } 
+      else {
+          middle = num
+      } 
+  }
+
+  return false
+};
