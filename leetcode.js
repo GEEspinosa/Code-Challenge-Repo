@@ -326,3 +326,59 @@ var compress = function(chars) {
   chars = compressed.split("")
   return chars.length
 };
+
+// 283 . Moving Zeros - easy Feb. 13, 2025
+
+//Given an integer array nums, move all 0's to the end of it 
+// while maintaining the relative order of the non-zero elements.
+// Note that you must do this in-place without making a copy of the array.
+
+// dev note: my first attempt passing through sluggish after forgetting bubble sort!!!
+
+var moveZeroes = function(nums) {
+ 
+  let cur 
+  let point 
+
+  for (let i = 0 ; i < nums.length ; i++ ) {
+
+      cur = nums[i]
+      
+      for (let k = cur ; k < nums.length ; k++) {
+
+          point = nums[k + 1]
+          if (nums[k+1] === undefined) {
+              point = nums[i +1]
+              break
+          }
+          
+          else if (nums[k] === 0) {
+              nums[k+1] = nums[k]
+              nums[k] = point      
+          }
+      }     
+  }
+};
+
+
+// Dev note:  better vision that uses one pointer in the nested conditional logic of nested loop
+
+var moveZeroes = function(nums) {
+
+  for (let i = 0 ; i < nums.length ; i++ ) {
+
+    //trims length of iteration since it's already sorted with zeros
+      for (let k = 0 ; k < (nums.length - i - 1) ; k++) {
+         
+
+        //places the pointer variable in the inner loop's conditional logic
+           if (nums[k] === 0) {
+              let tmp = nums[k]
+              nums[k] = nums[k + 1]
+              nums[k + 1] = tmp                
+          }
+      }     
+  }
+
+ console.log(nums)
+};
