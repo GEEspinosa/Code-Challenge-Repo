@@ -326,3 +326,56 @@ var compress = function(chars) {
   chars = compressed.split("")
   return chars.length
 };
+
+
+
+// 206. Reverse Linked List - easy Feb 20, 2025
+
+// Given the head of a singly linked list, 
+// reverse the list, and return the reversed list.
+
+// imperative/iterative
+
+var reverseList = function(head) {
+    
+    let prev = null;
+    let curr = head;
+    let next;
+
+    while (curr !== null) {
+
+        //reverse pointer
+
+        next = curr.next;
+        curr.next = prev;
+
+        //move ahead one
+
+        prev = curr;
+        curr = next;   
+    }
+    
+    return prev
+};
+
+//recursive
+
+var reverseList = function(head) {
+    
+  // base case
+
+  if (head === null || head.next === null) {
+      return head;
+  }
+
+  // reverse the list
+
+  const revHead = reverseList(head.next);
+
+  head.next.next = head;
+  head.next = null;
+
+  return revHead;
+
+  //
+};
