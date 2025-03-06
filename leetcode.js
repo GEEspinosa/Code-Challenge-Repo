@@ -372,3 +372,73 @@ var reverseList = function(head) {
 
   //
 };
+
+
+// 11. Container With Most Water - Medium Mar 5, 2025
+
+//You are given an integer array height of length n. 
+// There are n vertical lines drawn such that 
+// the two endpoints of the ith line are (i, 0) and (i, height[i]).
+// Find two lines that together with the x-axis form a container, 
+// such that the container contains the most water.
+// Return the maximum amount of water a container can store.
+
+var maxArea = function(height) {
+    
+  //dev note: this is nested loop answer that timed out
+
+  // let result = 0
+  // let compare = 0;
+
+
+  // for (let i = 0; i < height.length; i++ ) {
+  //     if (height[i+ 1] === undefined) {
+  //         break
+  //     }
+  //     for (let j = i + 1 ; j <height.length; j ++ ) {
+  //         let least = 0;
+  //         let most = 0;
+  //         if (height[i] >= height[j]) {
+  //             least = j
+  //             most = i
+  //         } else if (height [i] < height[j]) {
+  //             least = i;
+  //             most = j;
+  //         }
+  //         let diff = j - i
+  //         let compare = diff * (height[least])
+  //         if (compare > result) {
+  //             result = compare
+  //         }
+  //         console.log( diff, compare)
+  //     }
+  // }
+  // return result
+
+
+
+  //dev note: this is the two pointer answer that uses a while loop--much more performant
+
+  let result = 0
+  let left = 0;
+  let right = height.length - 1;
+
+
+  while (left < right) {
+      let width = right - left;
+      let minHeight = Math.min(height[left], height[right]);
+      let currentMax = width * minHeight
+      if (currentMax > result) {
+          result = currentMax
+      }
+
+      if (height[left] < height[right]) {
+          left++;
+      } else {
+          right--;
+      }
+      
+  }
+  
+  return result;
+};
