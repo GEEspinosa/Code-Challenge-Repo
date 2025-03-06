@@ -442,3 +442,34 @@ var maxArea = function(height) {
   
   return result;
 };
+
+
+//643. Maximum Average Subarray I - easy Mar 6, 2025
+
+
+// You are given an integer array nums consisting of n elements, 
+// and an integer k. Find a contiguous subarray whose length is equal to k 
+// that has the maximum average value and return this value. 
+// Any answer with a calculation error less than 10-5 will be accepted.
+
+var findMaxAverage = function(nums, k) {
+    
+  maxSum = 0;
+  curSum = 0;
+
+  for (let i = 0 ; i < k ; i++ ){
+      curSum += nums[i]
+  }
+
+  maxSum = curSum;
+
+  for (let i = k ; i < nums.length ; i++) {
+      curSum += nums[i] - nums[i - k];
+      if (curSum > maxSum) {
+          maxSum = curSum
+      }
+  }
+
+  return maxSum / k
+
+};
