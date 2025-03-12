@@ -508,3 +508,46 @@ var maxOperations = function(nums, k) {
 
   return result
 };
+
+
+
+// 26. Remove Duplicates from Sorted Array - easy Mar. 12, 2025
+
+
+//Given an integer array nums sorted in non-decreasing order, 
+// remove the duplicates in-place such that each unique element appears only once. 
+// The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+// Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+// Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
+// Return k.
+
+
+//Dev note: simple two pointer solution with O(n) time complexity.
+
+var removeDuplicates = function(nums) {
+   
+  //remove edge cases
+  if (nums.length === 0) return 0
+
+  //pointer one
+  let i = 0
+
+  //loop through and compare
+   for (let j = 1 ; j < nums.length; j++) {
+
+       //compares two pointers
+       if (nums[j] !== nums[i]) {
+
+           //increments first pointer
+           i++;
+
+           //swaps
+           nums[i] = nums[j]            
+       }      
+   }
+
+  // return i given it's incremented during iteration. 
+  //make sure to add one since it's initially tracking array indexices.
+  return i + 1 
+   
+};
