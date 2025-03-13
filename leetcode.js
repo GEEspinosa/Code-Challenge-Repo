@@ -551,3 +551,39 @@ var removeDuplicates = function(nums) {
   return i + 1 
    
 };
+
+// 9. Palindrome Number - easy Mar 12, 2025
+// Given an integer x, 
+// return true if x is a palindrome, 
+// and false otherwise.
+
+// solution: integer to string array and loop w/two pointer;
+// Time Comp: O(n)
+// Space Comp: O(n)
+
+var isPalindrome = function(x) {
+  let array = String(x).split('')
+  let left = 0;
+  let right = array.length - 1;
+
+  while (left < right) {
+      if (array[left] !== array[right]) {            
+          return false
+      } else {  
+          left++
+          right--
+      }
+  }
+
+  return true
+};
+
+//comparing two strings using methods solution
+
+var isPalindrome = function(x) {
+  let pal = String(x).split('').reverse().join('')
+  let norm = String(x)
+  console.log(pal, norm)
+  return norm === pal
+  
+};
