@@ -316,49 +316,44 @@ var compress = function (chars) {
     }
   }
 
-  chars = compressed.split("")
-  return chars.length
+  chars = compressed.split("");
+  return chars.length;
 };
-
-
 
 // 206. Reverse Linked List - easy Feb 20, 2025
 
-// Given the head of a singly linked list, 
+// Given the head of a singly linked list,
 // reverse the list, and return the reversed list.
 
 // imperative/iterative
 
-var reverseList = function(head) {
-    
-    let prev = null;
-    let curr = head;
-    let next;
+var reverseList = function (head) {
+  let prev = null;
+  let curr = head;
+  let next;
 
-    while (curr !== null) {
+  while (curr !== null) {
+    //reverse pointer
 
-        //reverse pointer
+    next = curr.next;
+    curr.next = prev;
 
-        next = curr.next;
-        curr.next = prev;
+    //move ahead one
 
-        //move ahead one
+    prev = curr;
+    curr = next;
+  }
 
-        prev = curr;
-        curr = next;   
-    }
-    
-    return prev
+  return prev;
 };
 
 //recursive
 
-var reverseList = function(head) {
-    
+var reverseList = function (head) {
   // base case
 
   if (head === null || head.next === null) {
-      return head;
+    return head;
   }
 
   // reverse the list
@@ -373,23 +368,20 @@ var reverseList = function(head) {
   //
 };
 
-
 // 11. Container With Most Water - Medium Mar 5, 2025
 
-//You are given an integer array height of length n. 
-// There are n vertical lines drawn such that 
+//You are given an integer array height of length n.
+// There are n vertical lines drawn such that
 // the two endpoints of the ith line are (i, 0) and (i, height[i]).
-// Find two lines that together with the x-axis form a container, 
+// Find two lines that together with the x-axis form a container,
 // such that the container contains the most water.
 // Return the maximum amount of water a container can store.
 
-var maxArea = function(height) {
-    
+var maxArea = function (height) {
   //dev note: this is nested loop answer that timed out
 
   // let result = 0
   // let compare = 0;
-
 
   // for (let i = 0; i < height.length; i++ ) {
   //     if (height[i+ 1] === undefined) {
@@ -415,202 +407,238 @@ var maxArea = function(height) {
   // }
   // return result
 
-
-
   //dev note: this is the two pointer answer that uses a while loop--much more performant
 
-  let result = 0
+  let result = 0;
   let left = 0;
   let right = height.length - 1;
 
-
   while (left < right) {
-      let width = right - left;
-      let minHeight = Math.min(height[left], height[right]);
-      let currentMax = width * minHeight
-      if (currentMax > result) {
-          result = currentMax
-      }
+    let width = right - left;
+    let minHeight = Math.min(height[left], height[right]);
+    let currentMax = width * minHeight;
+    if (currentMax > result) {
+      result = currentMax;
+    }
 
-      if (height[left] < height[right]) {
-          left++;
-      } else {
-          right--;
-      }
-      
+    if (height[left] < height[right]) {
+      left++;
+    } else {
+      right--;
+    }
   }
-  
+
   return result;
 };
 
-
 //643. Maximum Average Subarray I - easy Mar 6, 2025
 
-
-// You are given an integer array nums consisting of n elements, 
-// and an integer k. Find a contiguous subarray whose length is equal to k 
-// that has the maximum average value and return this value. 
+// You are given an integer array nums consisting of n elements,
+// and an integer k. Find a contiguous subarray whose length is equal to k
+// that has the maximum average value and return this value.
 // Any answer with a calculation error less than 10-5 will be accepted.
 
-var findMaxAverage = function(nums, k) {
-    
+var findMaxAverage = function (nums, k) {
   maxSum = 0;
   curSum = 0;
 
-  for (let i = 0 ; i < k ; i++ ){
-      curSum += nums[i]
+  for (let i = 0; i < k; i++) {
+    curSum += nums[i];
   }
 
   maxSum = curSum;
 
-  for (let i = k ; i < nums.length ; i++) {
-      curSum += nums[i] - nums[i - k];
-      if (curSum > maxSum) {
-          maxSum = curSum
-      }
+  for (let i = k; i < nums.length; i++) {
+    curSum += nums[i] - nums[i - k];
+    if (curSum > maxSum) {
+      maxSum = curSum;
+    }
   }
 
-  return maxSum / k
-
+  return maxSum / k;
 };
-
 
 //1679 . Max Number of K-Sum Pairs - medium Mar 7, 2025
 
 //You are given an integer array nums and an integer k.
-// In one operation, you can pick two numbers 
+// In one operation, you can pick two numbers
 // from the array whose sum equals k and remove them from the array.
 // Return the maximum number of operations you can perform on the array.
 
-
 //dev note: this is a simple two-pointer solution with O(n log n) run time.
 
-var maxOperations = function(nums, k) {
-    
-  nums.sort((a, b) => (a - b))
+var maxOperations = function (nums, k) {
+  nums.sort((a, b) => a - b);
 
   let result = 0;
   let left = 0;
   let right = nums.length - 1;
 
   while (left < right) {
-      let sum = nums[left] + nums[right]
-      if (sum === k) {
-          result++
-          left++
-          right--
-      } 
-      
-      else {
-         sum < k ? left++ : right--;
-      }
+    let sum = nums[left] + nums[right];
+    if (sum === k) {
+      result++;
+      left++;
+      right--;
+    } else {
+      sum < k ? left++ : right--;
+    }
   }
 
-  return result
+  return result;
 };
-
-
 
 // 26. Remove Duplicates from Sorted Array - easy Mar. 12, 2025
 
-
-//Given an integer array nums sorted in non-decreasing order, 
-// remove the duplicates in-place such that each unique element appears only once. 
+//Given an integer array nums sorted in non-decreasing order,
+// remove the duplicates in-place such that each unique element appears only once.
 // The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
 // Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
 // Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
 // Return k.
 
-
 //Dev note: simple two pointer solution with O(n) time complexity.
 
-var removeDuplicates = function(nums) {
-   
+var removeDuplicates = function (nums) {
   //remove edge cases
-  if (nums.length === 0) return 0
+  if (nums.length === 0) return 0;
 
   //pointer one
-  let i = 0
+  let i = 0;
 
   //loop through and compare
-   for (let j = 1 ; j < nums.length; j++) {
+  for (let j = 1; j < nums.length; j++) {
+    //compares two pointers
+    if (nums[j] !== nums[i]) {
+      //increments first pointer
+      i++;
 
-       //compares two pointers
-       if (nums[j] !== nums[i]) {
+      //swaps
+      nums[i] = nums[j];
+    }
+  }
 
-           //increments first pointer
-           i++;
-
-           //swaps
-           nums[i] = nums[j]            
-       }      
-   }
-
-  // return i given it's incremented during iteration. 
+  // return i given it's incremented during iteration.
   //make sure to add one since it's initially tracking array indexices.
-  return i + 1 
-   
+  return i + 1;
 };
 
 // 9. Palindrome Number - easy Mar 12, 2025
-// Given an integer x, 
-// return true if x is a palindrome, 
+// Given an integer x,
+// return true if x is a palindrome,
 // and false otherwise.
 
 // solution: integer to string array and loop w/two pointer;
 // Time Comp: O(n)
 // Space Comp: O(n)
 
-var isPalindrome = function(x) {
-  let array = String(x).split('')
+var isPalindrome = function (x) {
+  let array = String(x).split("");
   let left = 0;
   let right = array.length - 1;
 
   while (left < right) {
-      if (array[left] !== array[right]) {            
-          return false
-      } else {  
-          left++
-          right--
-      }
+    if (array[left] !== array[right]) {
+      return false;
+    } else {
+      left++;
+      right--;
+    }
   }
 
-  return true
+  return true;
 };
 
 //comparing two strings using methods solution
 
-var isPalindrome = function(x) {
-  let pal = String(x).split('').reverse().join('')
-  let norm = String(x)
-  console.log(pal, norm)
-  return norm === pal
-  
+var isPalindrome = function (x) {
+  let pal = String(x).split("").reverse().join("");
+  let norm = String(x);
+  console.log(pal, norm);
+  return norm === pal;
 };
-
 
 // 27. Remove Elements - easy Mar 13, 2025
 
-// Given an integer array nums and an integer val, 
-// remove all occurrences of val in nums in-place. 
-// The order of the elements may be changed. 
+// Given an integer array nums and an integer val,
+// remove all occurrences of val in nums in-place.
+// The order of the elements may be changed.
 // Then return the number of elements in nums which are not equal to val.
-// Consider the number of elements in nums which are not equal to val be k, 
+// Consider the number of elements in nums which are not equal to val be k,
 // to get accepted, you need to do the following things:
-// Change the array nums such that the first k elements of nums 
-// contain the elements which are not equal to val. 
+// Change the array nums such that the first k elements of nums
+// contain the elements which are not equal to val.
 // The remaining elements of nums are not important as well as the size of nums.
 // Return k.
 
 //Dev Note: iterate backwards to reduce time complexity of splice method.
 
-var removeElement = function(nums, val) {
-
-  for ( let i =  nums.length - 1 ; i >= 0 ; i-- ) {
-      if (nums[i] === val) {
-          nums.splice(i, 1)
-      } 
+var removeElement = function (nums, val) {
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (nums[i] === val) {
+      nums.splice(i, 1);
+    }
   }
-  return nums.length
-  
+  return nums.length;
+};
+
+
+//13 . Roman to Integer - easy Mar 17, 2025
+
+//Given a roman numeral, convert it to an integer.
+
+//dev note: hash map and single iteration strat using conditional logic (Time Complex O(n))
+
+var romanToInt = function (s) {
+  hashMap = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+
+  let arr = s.split("");
+  let result = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    let element = arr[i];
+    if (element === "I") {
+      if (arr[i + 1] === "V") {
+        result += 4;
+        i++;
+      } else if (arr[i + 1] === "X") {
+        result += 9;
+        i++;
+      } else {
+        result += hashMap[element];
+      }
+    } else if (element === "X") {
+      if (arr[i + 1] === "L") {
+        result += 40;
+        i++;
+      } else if (arr[i + 1] === "C") {
+        result += 90;
+        i++;
+      } else {
+        result += hashMap[element];
+      }
+    } else if (element === "C") {
+      if (arr[i + 1] === "D") {
+        result += 400;
+        i++;
+      } else if (arr[i + 1] === "M") {
+        result += 900;
+        i++;
+      } else {
+        result += hashMap[element];
+      }
+    } else {
+      result += hashMap[element];
+    }
+  }
+
+  return result;
 };
