@@ -582,7 +582,6 @@ var removeElement = function (nums, val) {
   return nums.length;
 };
 
-
 //13 . Roman to Integer - easy Mar 17, 2025
 
 //Given a roman numeral, convert it to an integer.
@@ -642,3 +641,45 @@ var romanToInt = function (s) {
 
   return result;
 };
+
+//28 . Find the Index of the First Occurence in a String - easy Mar 19, 2025
+
+//Given two strings needle and haystack, 
+// return the index of the first occurrence of needle in haystack, 
+// or -1 if needle is not part of haystack.
+
+//Dev Note: Initial answer but methods used slows performance with time complexity O(N * M)
+
+var strStr = function (haystack, needle) {
+  let arr = haystack.split("");
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === needle[0]) {
+      let comp = arr.slice(i, needle.length + i).join("");
+      if (comp === needle) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
+};
+
+
+//Dev Note: improved version of above-mentioned:
+
+
+//Doesn't need to split and join because loops can iterate over string elements; 
+// Also subtract needle length from terminating condition;
+
+var strStr = function(haystack, needle) {
+  for (let i = 0; i <= haystack.length - needle.length ; i++) {
+    if (haystack[i] === needle[0]) {
+      let comp = haystack.slice(i, needle.length + i)
+      if (comp === needle) {
+        return i;
+      }
+    }
+  }
+
+  return -1;
