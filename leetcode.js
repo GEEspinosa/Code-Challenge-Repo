@@ -644,8 +644,8 @@ var romanToInt = function (s) {
 
 //28 . Find the Index of the First Occurence in a String - easy Mar 19, 2025
 
-//Given two strings needle and haystack, 
-// return the index of the first occurrence of needle in haystack, 
+//Given two strings needle and haystack,
+// return the index of the first occurrence of needle in haystack,
 // or -1 if needle is not part of haystack.
 
 //Dev Note: Initial answer but methods used slows performance with time complexity O(N * M)
@@ -665,17 +665,15 @@ var strStr = function (haystack, needle) {
   return -1;
 };
 
-
 //Dev Note: improved version of above-mentioned:
 
-
-//Doesn't need to split and join because loops can iterate over string elements; 
+//Doesn't need to split and join because loops can iterate over string elements;
 // Also subtract needle length from terminating condition;
 
-var strStr = function(haystack, needle) {
-  for (let i = 0; i <= haystack.length - needle.length ; i++) {
+var strStr = function (haystack, needle) {
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
     if (haystack[i] === needle[0]) {
-      let comp = haystack.slice(i, needle.length + i)
+      let comp = haystack.slice(i, needle.length + i);
       if (comp === needle) {
         return i;
       }
@@ -683,3 +681,40 @@ var strStr = function(haystack, needle) {
   }
 
   return -1;
+};
+
+//26. Remove Duplicates from Sorted Array
+
+//dev note: my crazy initial version with Time Complexity O(n)
+
+var removeDuplicates = function (nums) {
+  let result = 0;
+  let curr = nums.length - 1;
+
+  for (let next = nums.length - 2; next >= 0; next--) {
+    if (nums[next] === nums[curr]) {
+      nums.splice(next, 1);
+      next++;
+    } else {
+      curr--;
+      result++;
+    }
+  }
+  return result + 1;
+};
+
+// dev better sorting solution
+
+var removeDuplicates = function (nums) {
+  if (nums.length === 0) return 0;
+
+  let i = 1;
+
+  for (let j = 1; j < nums.length; j++) {
+    if (nums[j] !== nums[j - 1]) {
+      nums[i] = nums[j];
+      i++;
+    }
+  }
+  return i;
+};
