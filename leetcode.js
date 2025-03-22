@@ -718,3 +718,51 @@ var removeDuplicates = function (nums) {
   }
   return i;
 };
+
+
+
+// 20. Valid Parentheses - easy Mar 22, 2025
+
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', 
+// determine if the input string is valid. An input string is valid if:
+// Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+// Every close bracket has a corresponding open bracket of the same type.
+
+
+// dev note: stack with hashmap answer without looking at other solutions, time complexity O(n)
+
+var isValid = function(s) {
+   
+  // make sure there are even pairs to evaluate
+
+  if (s.length % 2 > 0) {return false}
+
+  // use stack datastructure
+
+  let stack = [];
+
+  // object helps to pair corresponding symbol
+
+  const hashMap = {
+      '{' : "}",
+      '[' : "]",
+      '(' : ")",
+  }
+
+  // iterate
+
+  for ( let i = 0 ; i < s.length ; i++) {
+      let value = s[i]; 
+      if (value in hashMap) {
+          stack.push(hashMap[value])
+      } else if (
+          value === stack[stack.length-1]
+      ) {
+          stack.pop()
+      } else {
+          return false
+      }
+ }
+  return stack.length === 0
+};
