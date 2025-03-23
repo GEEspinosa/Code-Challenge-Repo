@@ -766,3 +766,17 @@ var isValid = function(s) {
  }
   return stack.length === 0
 };
+
+// 58. Length of Last Word - easy Mar 22, 2025
+
+//Given a string s consisting of words and spaces, 
+// return the length of the last word in the string.
+// A word is a maximal substring consisting of non-space characters only.
+
+
+// method stacking solution
+
+var lengthOfLastWord = function(s) {
+  let arr = s.split(' ').filter(word => word !== '').pop()
+  return arr.length
+};
