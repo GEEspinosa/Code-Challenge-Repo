@@ -719,24 +719,22 @@ var removeDuplicates = function (nums) {
   return i;
 };
 
-
-
 // 20. Valid Parentheses - easy Mar 22, 2025
 
-// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', 
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
 // determine if the input string is valid. An input string is valid if:
 // Open brackets must be closed by the same type of brackets.
 // Open brackets must be closed in the correct order.
 // Every close bracket has a corresponding open bracket of the same type.
 
-
 // dev note: stack with hashmap answer without looking at other solutions, time complexity O(n)
 
-var isValid = function(s) {
-   
+var isValid = function (s) {
   // make sure there are even pairs to evaluate
 
-  if (s.length % 2 > 0) {return false}
+  if (s.length % 2 > 0) {
+    return false;
+  }
 
   // use stack datastructure
 
@@ -745,38 +743,75 @@ var isValid = function(s) {
   // object helps to pair corresponding symbol
 
   const hashMap = {
-      '{' : "}",
-      '[' : "]",
-      '(' : ")",
-  }
+    "{": "}",
+    "[": "]",
+    "(": ")",
+  };
 
   // iterate
 
-  for ( let i = 0 ; i < s.length ; i++) {
-      let value = s[i]; 
-      if (value in hashMap) {
-          stack.push(hashMap[value])
-      } else if (
-          value === stack[stack.length-1]
-      ) {
-          stack.pop()
-      } else {
-          return false
-      }
- }
-  return stack.length === 0
+  for (let i = 0; i < s.length; i++) {
+    let value = s[i];
+    if (value in hashMap) {
+      stack.push(hashMap[value]);
+    } else if (value === stack[stack.length - 1]) {
+      stack.pop();
+    } else {
+      return false;
+    }
+  }
+  return stack.length === 0;
 };
 
 // 58. Length of Last Word - easy Mar 22, 2025
 
-//Given a string s consisting of words and spaces, 
+//Given a string s consisting of words and spaces,
 // return the length of the last word in the string.
 // A word is a maximal substring consisting of non-space characters only.
 
-
 // method stacking solution
 
-var lengthOfLastWord = function(s) {
-  let arr = s.split(' ').filter(word => word !== '').pop()
-  return arr.length
+var lengthOfLastWord = function (s) {
+  let arr = s
+    .split(" ")
+    .filter((word) => word !== "")
+    .pop();
+  return arr.length;
+};
+
+//88. Merge Sort Array - easy Mar 27, 2025
+
+//You are given two integer arrays nums1 and nums2, 
+// sorted in non-decreasing order, and two integers m and n, 
+// representing the number of elements in nums1 and nums2 respectively.
+// Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+// The final sorted array should not be returned by the function, 
+// but instead be stored inside the array nums1. 
+// To accommodate this, nums1 has a length of m + n, 
+// where the first m elements denote the elements that should be merged, 
+// and the last n elements are set to 0 and should be ignored. 
+// nums2 has a length of n.
+
+var merge = function (nums1, m, nums2, n) {
+  let p1 = m - 1;
+  let p2 = n - 1;
+  let end = m + n - 1;
+
+  while (p1 >= 0 && p2 >= 0) {
+    if (nums1[p1] < nums2[p2]) {
+      nums1[end] = nums2[p2];
+      end--;
+      p2--;
+    } else {
+      nums1[end] = nums1[p1];
+      end--;
+      p1--;
+    }
+  }
+
+  while (p2 >= 0) {
+    nums1[end] = nums2[p2];
+    p2--;
+    end--;
+  }
 };
