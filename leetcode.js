@@ -781,15 +781,15 @@ var lengthOfLastWord = function (s) {
 
 //88. Merge Sort Array - easy Mar 27, 2025
 
-//You are given two integer arrays nums1 and nums2, 
-// sorted in non-decreasing order, and two integers m and n, 
+//You are given two integer arrays nums1 and nums2,
+// sorted in non-decreasing order, and two integers m and n,
 // representing the number of elements in nums1 and nums2 respectively.
 // Merge nums1 and nums2 into a single array sorted in non-decreasing order.
-// The final sorted array should not be returned by the function, 
-// but instead be stored inside the array nums1. 
-// To accommodate this, nums1 has a length of m + n, 
-// where the first m elements denote the elements that should be merged, 
-// and the last n elements are set to 0 and should be ignored. 
+// The final sorted array should not be returned by the function,
+// but instead be stored inside the array nums1.
+// To accommodate this, nums1 has a length of m + n,
+// where the first m elements denote the elements that should be merged,
+// and the last n elements are set to 0 and should be ignored.
 // nums2 has a length of n.
 
 var merge = function (nums1, m, nums2, n) {
@@ -814,4 +814,28 @@ var merge = function (nums1, m, nums2, n) {
     p2--;
     end--;
   }
+};
+
+//136. Single Number - easy Mar 28, 2025
+
+//Given a non-empty array of integers nums, 
+// every element appears twice except for one. Find that single one.
+//You must implement a solution with a linear runtime 
+// complexity and use only constant extra space.
+
+//dev note: my first attempt using hash table and one iteration
+
+var singleNumber = function (nums) {
+  let hashMap = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    let key = nums[i];
+    if (nums[i] in hashMap) {
+      delete hashMap[key];
+    } else {
+      hashMap[key] = 1;
+    }
+  }
+
+  return parseInt(Object.keys(hashMap));
 };
