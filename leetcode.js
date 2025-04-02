@@ -839,3 +839,33 @@ var singleNumber = function (nums) {
 
   return parseInt(Object.keys(hashMap));
 };
+
+
+//21. Merge Two Sorted Lists - easy Apr 1, 2025
+
+//You are given the heads of two sorted linked lists list1 and list2.
+// Merge the two lists into one sorted list. 
+// The list should be made by splicing 
+// together the nodes of the first two lists.
+// Return the head of the merged linked list.
+
+//Dev note: just studying because LC way of accessing the list value and next was confusing
+//while-loop solution that makes sense.
+
+var mergeTwoLists = function(l1, l2) {
+  let tempNode = new ListNode(0, null);
+  let currentNode = tempNode;
+
+  while (l1 && l2) {
+      if (l1.val < l2.val) {
+          currentNode.next = l1;
+          l1 = l1.next
+      } else {
+          currentNode.next = l2;
+          l2 = l2.next
+      }
+      currentNode = currentNode.next;
+  }
+  currentNode.next = l1 || l2;
+  return tempNode.next; 
+};
