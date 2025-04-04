@@ -869,3 +869,30 @@ var mergeTwoLists = function(l1, l2) {
   currentNode.next = l1 || l2;
   return tempNode.next; 
 };
+
+
+
+
+//35. Search Insert Position - easy Apr 4, 2025
+
+// Given a sorted array of distinct integers and a target value, 
+// return the index if the target is found. 
+// If not, return the index where it would be if it were 
+// inserted in order. You must write an algorithm with O(log n) 
+// runtime complexity.
+
+//dev note: first attempt iterative
+
+var searchInsert = function(nums, target) {
+    
+  for (let i = 0 ; i < nums.length ; i++ ) {
+      let value = nums[i];
+      if (value === target) {
+          return i
+      } 
+      if (value > target) {
+          return i
+      } 
+  }
+      return nums.length
+  };
