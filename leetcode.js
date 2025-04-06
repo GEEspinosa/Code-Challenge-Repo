@@ -818,9 +818,9 @@ var merge = function (nums1, m, nums2, n) {
 
 //136. Single Number - easy Mar 28, 2025
 
-//Given a non-empty array of integers nums, 
+//Given a non-empty array of integers nums,
 // every element appears twice except for one. Find that single one.
-//You must implement a solution with a linear runtime 
+//You must implement a solution with a linear runtime
 // complexity and use only constant extra space.
 
 //dev note: my first attempt using hash table and one iteration
@@ -840,59 +840,78 @@ var singleNumber = function (nums) {
   return parseInt(Object.keys(hashMap));
 };
 
-
 //21. Merge Two Sorted Lists - easy Apr 1, 2025
 
 //You are given the heads of two sorted linked lists list1 and list2.
-// Merge the two lists into one sorted list. 
-// The list should be made by splicing 
+// Merge the two lists into one sorted list.
+// The list should be made by splicing
 // together the nodes of the first two lists.
 // Return the head of the merged linked list.
 
 //Dev note: just studying because LC way of accessing the list value and next was confusing
 //while-loop solution that makes sense.
 
-var mergeTwoLists = function(l1, l2) {
+var mergeTwoLists = function (l1, l2) {
   let tempNode = new ListNode(0, null);
   let currentNode = tempNode;
 
   while (l1 && l2) {
-      if (l1.val < l2.val) {
-          currentNode.next = l1;
-          l1 = l1.next
-      } else {
-          currentNode.next = l2;
-          l2 = l2.next
-      }
-      currentNode = currentNode.next;
+    if (l1.val < l2.val) {
+      currentNode.next = l1;
+      l1 = l1.next;
+    } else {
+      currentNode.next = l2;
+      l2 = l2.next;
+    }
+    currentNode = currentNode.next;
   }
   currentNode.next = l1 || l2;
-  return tempNode.next; 
+  return tempNode.next;
 };
-
-
-
 
 //35. Search Insert Position - easy Apr 4, 2025
 
-// Given a sorted array of distinct integers and a target value, 
-// return the index if the target is found. 
-// If not, return the index where it would be if it were 
-// inserted in order. You must write an algorithm with O(log n) 
+// Given a sorted array of distinct integers and a target value,
+// return the index if the target is found.
+// If not, return the index where it would be if it were
+// inserted in order. You must write an algorithm with O(log n)
 // runtime complexity.
 
 //dev note: first attempt iterative
 
-var searchInsert = function(nums, target) {
-    
-  for (let i = 0 ; i < nums.length ; i++ ) {
-      let value = nums[i];
-      if (value === target) {
-          return i
-      } 
-      if (value > target) {
-          return i
-      } 
+var searchInsert = function (nums, target) {
+  for (let i = 0; i < nums.length; i++) {
+    let value = nums[i];
+    if (value === target) {
+      return i;
+    }
+    if (value > target) {
+      return i;
+    }
   }
-      return nums.length
-  };
+  return nums.length;
+};
+
+//14. Longest Common Prefix - easy, Apr 6, 2025
+
+//Write a function to find the longest 
+// common prefix string amongst an array of strings.
+// If there is no common prefix, return an empty string "".
+
+var longestCommonPrefix = function (strs) {
+  let prefix = strs[0].split("");
+
+  for (let i = 1; i < strs.length; i++) {
+    let word = strs[i];
+    let wordLength = word.length;
+    prefix.splice(wordLength);
+    for (let j = 0; j < word.length; j++) {
+      let letter = word[j];
+      if (letter !== prefix[j]) {
+        prefix.splice(j);
+        break;
+      }
+    }
+  }
+  return prefix.join("");
+};
