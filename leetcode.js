@@ -894,7 +894,7 @@ var searchInsert = function (nums, target) {
 
 //14. Longest Common Prefix - easy, Apr 6, 2025
 
-//Write a function to find the longest 
+//Write a function to find the longest
 // common prefix string amongst an array of strings.
 // If there is no common prefix, return an empty string "".
 
@@ -914,4 +914,43 @@ var longestCommonPrefix = function (strs) {
     }
   }
   return prefix.join("");
+};
+
+//83. Remove Duplicates from Sorted List - easy Apr 9, 2025
+
+// Given the head of a sorted linked list, 
+// delete all duplicates such that each element appears only once. 
+// Return the linked list sorted as well.
+
+var deleteDuplicates = function (head) {
+
+  //edge case where list is empty
+  if (head === null) {
+    return head;
+  }
+
+  //our pointer that traverses the list
+  let curr = head;
+
+  //while loop checking when the next pointer of current node is null
+  while (curr.next !== null) {
+
+    //conditional comparing values of curr and the next node
+    if (curr.val === curr.next.val) {
+
+      //variable that holds second node down from current
+      let skip = curr.next.next;
+
+      //current node's pointer then skips over the node with repeated val to the skip node
+      curr.next = skip;
+    } else {
+
+      //if compared values are not the same, allow current node to traverse 
+      //to the next before following iteration
+      curr = curr.next;
+    }
+  }
+
+  //duplicates should be skipped in the list, can return the head
+  return head;
 };
