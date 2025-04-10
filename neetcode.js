@@ -59,9 +59,9 @@ function isAnagram(s, t) {
 
 //Two Sum - easy Apr 8, 2025
 
-//Given an array of integers nums and an integer target, 
+//Given an array of integers nums and an integer target,
 // return the indices i and j such that nums[i] + nums[j] == target and i != j.
-// You may assume that every input has exactly one 
+// You may assume that every input has exactly one
 // pair of indices i and j that satisfy the condition.
 // Return the answer with the smaller index first.
 
@@ -85,4 +85,69 @@ function twoSum(nums, target) {
       beg++;
     }
   }
+}
+
+//Reverse Linked List (again, I need the practice with lists) - easy, Apr 10, 2025
+
+function reverseList(head) {
+  let curr = head;
+  let prev = null;
+  let next;
+
+  while (curr !== null) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+
+//Merge Two Sorted Linked Lists - easy Apr 10, 2025
+
+//You are given the heads of two sorted linked lists list1 and list2.
+// Merge the two lists into one sorted linked list and return 
+// the head of the new sorted linked list.
+// The new list should be made up of nodes from list1 and list2.
+
+function mergeTwoLists(list1, list2) {
+  //building a new linked list and assigning first node
+  const result = { val: 0, next: null };
+
+  //variables to shorthand params further
+  let l1 = list1;
+  let l2 = list2;
+
+  //temporary pointer used to construct and traverse result
+  let pointer = result;
+
+  //iterating through both lists until reaching end of shortest
+  while (l1 && l2) {
+    //conditional comparing values of current node placement of each list
+    if (l1.val <= l2.val) {
+      //using the pointer arrow to node with lowest val
+      pointer.next = l1;
+      //moving moving to next node from selected list
+      l1 = l1.next;
+    } else {
+      //the other result of conditional doing the same for l2
+      pointer.next = l2;
+      l2 = l2.next;
+    }
+    //moving the pointer to recently added node as setup for next iteration
+    pointer = pointer.next;
+  }
+
+  //this conditional is used to add any remaining nodes
+  //not traversed during while loop to end of result
+  if (l1) {
+    pointer.next = l1;
+  } else {
+    pointer.next = l2;
+  }
+
+  //return the new linked list
+  //but starting after first node because
+  //it's value isn't in l1 or l2
+  return result.next;
 }
