@@ -1020,12 +1020,11 @@ var findDifference = function (nums1, nums2) {
 
 //returning to 1. Two Sum - easy Apr 16, 2025 (for Pinterest Interview)
 
-//Given an array of integers nums and an integer target, 
+//Given an array of integers nums and an integer target,
 // return indices of the two numbers such that they add up to target.
-// You may assume that each input would have exactly one solution, 
+// You may assume that each input would have exactly one solution,
 // and you may not use the same element twice.
 // You can return the answer in any order.
-
 
 var twoSum = function (nums, target) {
   //brute force, first attempt (nested loops)
@@ -1046,17 +1045,53 @@ var twoSum = function (nums, target) {
   let hash = {};
 
   for (let i = 0; i < nums.length; i++) {
-
     //create variable that stores remainder from subtracting current number from target
     const remainder = target - nums[i];
 
     //in conditional, we ask if the remainder is in our hash. If so, return that stored index and index of i,
     //else add it to the hash table
-    
+
     if (remainder in hash) {
       return [hash[remainder], i];
     } else {
       hash[nums[i]] = i;
     }
   }
+};
+
+//return to 20. Valid Parentheses - easy Apr 17, 2025 (for Pinterest Interview)
+
+var isValid = function (s) {
+  //1) object of key value pairs to refer to while iterating
+
+  const table = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
+
+  //2) a stack that we push and pop to retain proper order of parentheses
+
+  let stack = [];
+
+  //3) then iterate with conditional logic buiilding and subtracting the stack
+
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    //check if character is key in table --> push
+    if (char in table) {
+      stack.push(table[char]);
+    } 
+    //check if character is the same as last in stack --> pop
+    else if (char === stack[stack.length - 1]) {
+      stack.pop();
+    } 
+    //inferred last outcome is char is not in proper order --> return false
+    else {
+      return false;
+    }
+  }
+
+  //4) ternary statement: if stack has any elements in the array, it's false. Else true.
+  return stack.length ? false : true;
 };
