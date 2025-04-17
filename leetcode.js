@@ -1017,3 +1017,46 @@ var findDifference = function (nums1, nums2) {
 
   return [arr1, arr2];
 };
+
+//returning to 1. Two Sum - easy Apr 16, 2025 (for Pinterest Interview)
+
+//Given an array of integers nums and an integer target, 
+// return indices of the two numbers such that they add up to target.
+// You may assume that each input would have exactly one solution, 
+// and you may not use the same element twice.
+// You can return the answer in any order.
+
+
+var twoSum = function (nums, target) {
+  //brute force, first attempt (nested loops)
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
+      } else {
+        continue;
+      }
+    }
+  }
+
+  //hash table, linear time operation
+
+  //use a object as a hash table to store through first iteration
+  let hash = {};
+
+  for (let i = 0; i < nums.length; i++) {
+
+    //create variable that stores remainder from subtracting current number from target
+    const remainder = target - nums[i];
+
+    //in conditional, we ask if the remainder is in our hash. If so, return that stored index and index of i,
+    //else add it to the hash table
+    
+    if (remainder in hash) {
+      return [hash[remainder], i];
+    } else {
+      hash[nums[i]] = i;
+    }
+  }
+};
