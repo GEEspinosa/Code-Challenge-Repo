@@ -1081,11 +1081,11 @@ var isValid = function (s) {
     //check if character is key in table --> push
     if (char in table) {
       stack.push(table[char]);
-    } 
+    }
     //check if character is the same as last in stack --> pop
     else if (char === stack[stack.length - 1]) {
       stack.pop();
-    } 
+    }
     //inferred last outcome is char is not in proper order --> return false
     else {
       return false;
@@ -1094,4 +1094,39 @@ var isValid = function (s) {
 
   //4) ternary statement: if stack has any elements in the array, it's false. Else true.
   return stack.length ? false : true;
+};
+
+// return to 21. Merge Two Sorted Lists - easy Apr 17, 2025 (Pinterest Interview Practice)
+
+//You are given the heads of two sorted linked lists list1 and list2.
+// Merge the two lists into one sorted list. 
+// The list should be made by splicing together the nodes of the first two lists.
+// Return the head of the merged linked list.
+
+
+
+//dev note: first attempt
+var mergeTwoLists = function (list1, list2) {
+  let newList = { val: null, next: null };
+  let pointer = newList;
+
+  while (list1 && list2) {
+    if (list1.val >= list2.val) {
+      pointer.next = list2;
+      list2 = list2.next;
+      pointer = pointer.next;
+    } else {
+      pointer.next = list1;
+      list1 = list1.next;
+      pointer = pointer.next;
+    }
+  }
+
+  if (list1) {
+    pointer.next = list1;
+  } else {
+    pointer.next = list2;
+  }
+
+  return newList.next;
 };
