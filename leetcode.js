@@ -1099,11 +1099,9 @@ var isValid = function (s) {
 // return to 21. Merge Two Sorted Lists - easy Apr 17, 2025 (Pinterest Interview Practice)
 
 //You are given the heads of two sorted linked lists list1 and list2.
-// Merge the two lists into one sorted list. 
+// Merge the two lists into one sorted list.
 // The list should be made by splicing together the nodes of the first two lists.
 // Return the head of the merged linked list.
-
-
 
 //dev note: first attempt
 var mergeTwoLists = function (list1, list2) {
@@ -1129,4 +1127,65 @@ var mergeTwoLists = function (list1, list2) {
   }
 
   return newList.next;
+};
+
+//121. Best Time to Buy and Sell Stock - easy Apr 18, 2025
+
+// You are given an array prices where prices[i] is the price of a given 
+// stock on the ith day. You want to maximize your profit by 
+// choosing a single day to buy one stock and choosing a different 
+// day in the future to sell that stock. Return the maximum profit you 
+// can achieve from this transaction. 
+// If you cannot achieve any profit, return 0.
+
+//dev note: first partial correct attempt
+
+var maxProfit = function (prices) {
+  // compare values
+  let lowest = 0;
+  let highest = 0;
+
+  //end pointer
+  let beg = 0;
+  let end = prices.length - 1;
+
+  // while loop
+  while (beg < end) {
+    lowest = prices[beg];
+    highest = prices[end];
+
+    if (prices[beg + 1] < lowest) {
+      beg++;
+    } else if (prices[end - 1] > highest) {
+      end--;
+    } else {
+      break;
+    }
+  }
+
+  console.log(lowest, highest);
+
+  return highest - lowest > 0 ? highest - lowest : 0;
+  // return a ternary checking if result is > 0
+};
+
+//dev note: successful and performant solution
+
+var maxProfit = function (prices) {
+  let left = 0;
+  let right = 1;
+  let highest = 0;
+
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      let profit = prices[right] - prices[left];
+      if (highest < profit) {
+        highest = profit;
+      }
+    } else {
+      left = right;
+    }
+    right++;
+  }
+  return highest;
 };
