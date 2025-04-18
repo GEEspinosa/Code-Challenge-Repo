@@ -1131,11 +1131,11 @@ var mergeTwoLists = function (list1, list2) {
 
 //121. Best Time to Buy and Sell Stock - easy Apr 18, 2025
 
-// You are given an array prices where prices[i] is the price of a given 
-// stock on the ith day. You want to maximize your profit by 
-// choosing a single day to buy one stock and choosing a different 
-// day in the future to sell that stock. Return the maximum profit you 
-// can achieve from this transaction. 
+// You are given an array prices where prices[i] is the price of a given
+// stock on the ith day. You want to maximize your profit by
+// choosing a single day to buy one stock and choosing a different
+// day in the future to sell that stock. Return the maximum profit you
+// can achieve from this transaction.
 // If you cannot achieve any profit, return 0.
 
 //dev note: first partial correct attempt
@@ -1188,4 +1188,23 @@ var maxProfit = function (prices) {
     right++;
   }
   return highest;
+};
+
+//125. Valid Palindrome (only alphanumeric characters!)- easy Apr 18, 2025
+
+// A phrase is a palindrome if, 
+// after converting all uppercase letters into 
+// lowercase letters and removing all non-alphanumeric characters, 
+// it reads the same forward and backward. 
+// Alphanumeric characters include letters and numbers.
+// Given a string s, return true if it is a palindrome, 
+// or false otherwise.
+
+//dev note: JS method chaining 
+
+var isPalindrome = function (s) {
+  let filterString = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return filterString === filterString.split("").reverse().join("")
+    ? true
+    : false;
 };
