@@ -1358,3 +1358,31 @@ var isAnagram = function (s, t) {
 
   return true;
 };
+
+//226. Invert Binary Tree - easy Apr 19, 2025
+
+//Given the root of a binary tree, invert the tree, 
+// and return its root.
+
+//dev note: recursive solution
+
+var invertTree = function (root) {
+  //base case: condition to stop recursion
+  if (root === null) {
+    return null;
+  }
+
+  //swapping left & right using temp variable for storing
+  let temp = root.left;
+  root.left = root.right;
+  root.right = temp;
+
+  //recursively calling invertTree sending
+  //left and right nodes as arguments.
+
+  invertTree(root.left);
+  invertTree(root.right);
+
+  //return resulting root after base case reached
+  return root;
+};
