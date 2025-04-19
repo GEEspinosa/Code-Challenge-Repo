@@ -1192,15 +1192,15 @@ var maxProfit = function (prices) {
 
 //125. Valid Palindrome (only alphanumeric characters!)- easy Apr 18, 2025
 
-// A phrase is a palindrome if, 
-// after converting all uppercase letters into 
-// lowercase letters and removing all non-alphanumeric characters, 
-// it reads the same forward and backward. 
+// A phrase is a palindrome if,
+// after converting all uppercase letters into
+// lowercase letters and removing all non-alphanumeric characters,
+// it reads the same forward and backward.
 // Alphanumeric characters include letters and numbers.
-// Given a string s, return true if it is a palindrome, 
+// Given a string s, return true if it is a palindrome,
 // or false otherwise.
 
-//dev note: JS method chaining 
+//dev note: JS method chaining, specifically using .replace() with RegEx condition
 
 var isPalindrome = function (s) {
   let filterString = s.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -1208,3 +1208,34 @@ var isPalindrome = function (s) {
     ? true
     : false;
 };
+
+//704. Binary Search - easy Apr 18, 2025
+
+//Given an array of integers nums which is sorted in ascending order, 
+// and an integer target, write a function to search target in nums. 
+// If target exists, then return its index. Otherwise, return -1.
+// You must write an algorithm with O(log n) runtime complexity.
+
+//Dev note: I had everything right except I kept screwing up the equation for middle 
+// and placed it outside the white loop
+
+var search = function (nums, target) {
+  let beg = 0;
+  let end = nums.length - 1;
+
+  while (beg <= end) {
+
+    // make sure to remember this! Add end and beg before dividing, 
+    // then make sure to round (or use modulo conditional)
+    let middle = parseInt((end + beg) / 2);
+    if (nums[middle] === target) {
+      return middle;
+    } else if (nums[middle] < target) {
+      beg = middle + 1;
+    } else {
+      end = middle - 1;
+    }
+  }
+  return -1;
+};
+
