@@ -1211,12 +1211,12 @@ var isPalindrome = function (s) {
 
 //704. Binary Search - easy Apr 18, 2025
 
-//Given an array of integers nums which is sorted in ascending order, 
-// and an integer target, write a function to search target in nums. 
+//Given an array of integers nums which is sorted in ascending order,
+// and an integer target, write a function to search target in nums.
 // If target exists, then return its index. Otherwise, return -1.
 // You must write an algorithm with O(log n) runtime complexity.
 
-//Dev note: I had everything right except I kept screwing up the equation for middle 
+//Dev note: I had everything right except I kept screwing up the equation for middle
 // and placed it outside the white loop
 
 var search = function (nums, target) {
@@ -1224,8 +1224,7 @@ var search = function (nums, target) {
   let end = nums.length - 1;
 
   while (beg <= end) {
-
-    // make sure to remember this! Add end and beg before dividing, 
+    // make sure to remember this! Add end and beg before dividing,
     // then make sure to round (or use modulo conditional)
     let middle = parseInt((end + beg) / 2);
     if (nums[middle] === target) {
@@ -1239,3 +1238,123 @@ var search = function (nums, target) {
   return -1;
 };
 
+//242. Valid Anagram - easy Apr 18, 2025
+
+//Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+//Dev Note: first attempt, trying to avoid deleting from one hash table and using build-in set()
+
+var isAnagram = function (s, t) {
+  let obj1 = {};
+  let obj2 = {};
+
+  for (char of s) {
+    if (!(char in obj1)) {
+      obj1[char] = 1;
+    } else {
+      obj1[char]++;
+    }
+  }
+
+  for (char of t) {
+    if (!(char in obj2)) {
+      obj2[char] = 1;
+    } else {
+      obj2[char]++;
+    }
+  }
+
+  for (char in obj1) {
+    if (!(char in obj2)) {
+      return false;
+    } else {
+      if (obj1[char] !== obj2[char]) {
+        return false;
+      }
+    }
+  }
+
+  for (char in obj2) {
+    if (!(char in obj1)) {
+      return false;
+    } else {
+      if (obj1[char] !== obj2[char]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
+//dev note : second attempt, using length comparison at beginning to remove unnecessary looping
+
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) {
+    return false;
+  }
+
+  let obj1 = {};
+  let obj2 = {};
+
+  for (char of s) {
+    if (!(char in obj1)) {
+      obj1[char] = 1;
+    } else {
+      obj1[char]++;
+    }
+  }
+
+  for (char of t) {
+    if (!(char in obj2)) {
+      obj2[char] = 1;
+    } else {
+      obj2[char]++;
+    }
+  }
+
+  for (char in obj1) {
+    if (!(char in obj2)) {
+      return false;
+    } else {
+      if (obj1[char] !== obj2[char]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
+//dev note: third attempt to remove an extra loop and hash table by decrementing
+// the value of keys on second loop or deleting if it's just 1.
+
+var isAnagram = function (s, t) {
+  if (s.length !== t.length) {
+    return false;
+  }
+
+  let hash = {};
+
+  for (char of s) {
+    if (!(char in hash)) {
+      hash[char] = 1;
+    } else {
+      hash[char]++;
+    }
+  }
+
+  for (char of t) {
+    if (!(char in hash)) {
+      return false;
+    } else {
+      if (hash[char] > 1) {
+        hash[char]--;
+      } else {
+        delete hash[char];
+      }
+    }
+  }
+
+  return true;
+};
