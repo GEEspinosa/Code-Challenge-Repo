@@ -1361,7 +1361,7 @@ var isAnagram = function (s, t) {
 
 //226. Invert Binary Tree - easy Apr 19, 2025
 
-//Given the root of a binary tree, invert the tree, 
+//Given the root of a binary tree, invert the tree,
 // and return its root.
 
 //dev note: recursive solution
@@ -1385,4 +1385,51 @@ var invertTree = function (root) {
 
   //return resulting root after base case reached
   return root;
+};
+
+//141 . Linked List Cycle - easy Apr 20, 2025
+
+//Given head, the head of a linked list, determine if the linked list
+// has a cycle in it. There is a cycle in a linked list if there is some
+// node in the list that can be reached again by continuously following the next pointer.
+// Internally, pos is used to denote the index of the node that tail's
+// next pointer is connected to. Note that pos is not passed as a parameter.
+// Return true if there is a cycle in the linked list. Otherwise, return false.
+
+//dev note: first solution - Set() method for hash table
+// important to use set instead of using object as hash table.
+// They won't work properly for checking object identity because
+// object keys are always converted to strings (e.g., "[object Object]"),
+// so it can't distinguish between different node objects.
+
+var hasCycle = function (head) {
+  let hash = new Set();
+  let curr = head;
+
+  while (curr !== null) {
+    if (hash.has(curr)) {
+      return true;
+    }
+    hash.add(curr);
+    curr = curr.next;
+  }
+  return false;
+};
+
+//dev note: Floyd's Tortoise & Hare Two Pointer Algorithm
+
+var hasCycle = function (head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+
+    if (slow === fast) {
+      return true;
+    }
+  }
+
+  return false;
 };
