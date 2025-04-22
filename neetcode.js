@@ -106,7 +106,7 @@ function reverseList(head) {
 //Merge Two Sorted Linked Lists - easy Apr 10, 2025
 
 //You are given the heads of two sorted linked lists list1 and list2.
-// Merge the two lists into one sorted linked list and return 
+// Merge the two lists into one sorted linked list and return
 // the head of the new sorted linked list.
 // The new list should be made up of nodes from list1 and list2.
 
@@ -150,4 +150,24 @@ function mergeTwoLists(list1, list2) {
   //but starting after first node because
   //it's value isn't in l1 or l2
   return result.next;
+}
+
+//Valid Palindrome - easy Apr 22, 2025
+
+//Given a string s, return true if it is a palindrome,
+// otherwise return false. A palindrome is a string that reads
+// the same forward and backward. It is also case-insensitive
+// and ignores all non-alphanumeric characters.
+
+//javascript method heavy approach with time complexity O(n) 
+// since all methods are one pass iterations.
+
+function isPalindrome(s) {
+  let arr = s
+    .toLowerCase()
+    .split("")
+    .filter((char) => char.match(/[a-z0-9]/))
+    .join("");
+
+  return arr === arr.split("").reverse().join("") ? true : false;
 }
