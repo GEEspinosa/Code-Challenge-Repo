@@ -1433,3 +1433,67 @@ var hasCycle = function (head) {
 
   return false;
 };
+
+//232. Implement Queue using Stacks
+
+//Implement a first in first out (FIFO) queue using only two stacks. 
+// The implemented queue should support all 
+// the functions of a normal queue (push, peek, pop, and empty).
+// Implement the MyQueue class: void push(int x) Pushes element x to the back of the queue.
+// int pop() Removes the element from the front of the queue and returns it.
+// int peek() Returns the element at the front of the queue.
+// boolean empty() Returns true if the queue is empty, false otherwise.
+
+var MyQueue = function () {
+  this.inStack = [];
+  this.outStack = [];
+};
+
+/**
+ * @param {number} x
+ * @return {void}
+ */
+MyQueue.prototype.push = function (x) {
+  //takes argument and add to the inStack
+  this.inStack.push(x);
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.pop = function () {
+  //these two conditionals check to see if
+  //there is any elements in the queue (two stacks), and if not any in outStack,
+  //loops through the inStack popping from the the top (the back of line) and     putting them last in the outStack (making the bottom of inStack to the top of outStack)
+  if (this.empty()) return null;
+  if (this.outStack.length === 0) {
+    while (this.inStack.length) {
+      this.outStack.push(this.inStack.pop());
+    }
+  }
+
+  //returns the popped value from outStack
+  return this.outStack.pop();
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.peek = function () {
+  if (this.empty()) return null;
+  if (this.outStack.length === 0) {
+    while (this.inStack.length) {
+      this.outStack.push(this.inStack.pop());
+    }
+  }
+
+  //returns last element in the outStack array without popping it
+  return this.outStack[this.outStack.length - 1];
+};
+
+/**
+ * @return {boolean}
+ */
+MyQueue.prototype.empty = function () {
+  return this.inStack.length === 0 && this.outStack.length === 0;
+};
