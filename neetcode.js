@@ -159,7 +159,7 @@ function mergeTwoLists(list1, list2) {
 // the same forward and backward. It is also case-insensitive
 // and ignores all non-alphanumeric characters.
 
-//javascript method heavy approach with time complexity O(n) 
+//javascript method heavy approach with time complexity O(n)
 // since all methods are one pass iterations.
 
 function isPalindrome(s) {
@@ -170,4 +170,25 @@ function isPalindrome(s) {
     .join("");
 
   return arr === arr.split("").reverse().join("") ? true : false;
+}
+
+//Group Anagrams - Medium Apr 24, 2025
+
+//Given an array of strings strs, group all anagrams together 
+// into sublists. You may return the output in any order.
+// An anagram is a string that contains the exact same characters 
+// as another string, but the order of the characters can be different.
+
+function groupAnagrams(strs) {
+  let hash = {};
+
+  for (let i = 0; i < strs.length; i++) {
+    let sorted = strs[i].split("").sort().join("");
+
+    if (!(sorted in hash)) {
+      hash[sorted] = [];
+    }
+    hash[sorted].push(strs[i]);
+  }
+  return Object.values(hash);
 }
