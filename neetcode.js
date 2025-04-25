@@ -174,9 +174,9 @@ function isPalindrome(s) {
 
 //Group Anagrams - Medium Apr 24, 2025
 
-//Given an array of strings strs, group all anagrams together 
+//Given an array of strings strs, group all anagrams together
 // into sublists. You may return the output in any order.
-// An anagram is a string that contains the exact same characters 
+// An anagram is a string that contains the exact same characters
 // as another string, but the order of the characters can be different.
 
 function groupAnagrams(strs) {
@@ -191,4 +191,37 @@ function groupAnagrams(strs) {
     hash[sorted].push(strs[i]);
   }
   return Object.values(hash);
+}
+
+//Top K Frequent Elements - Medium Apr 25, 2025
+
+//Given an integer array nums and an integer k, 
+//return the k most frequent elements within the array.
+// The test cases are generated such that the answer 
+// is always unique. You may return the output in any order
+
+function topKFrequent(nums, k) {
+  let hash = {};
+  let arr = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    if (!(nums[i] in hash)) {
+      hash[nums[i]] = 1;
+    } else {
+      hash[nums[i]]++;
+    }
+  }
+
+  for (let pair in hash) {
+    arr.push([parseInt(pair), hash[pair]]);
+  }
+
+  let sorted = arr.sort((a, b) => b[1] - a[1]).slice(0, k);
+  let result = [];
+
+  for (let j = 0; j < sorted.length; j++) {
+    result.push(sorted[j][0]);
+  }
+
+  return result;
 }
