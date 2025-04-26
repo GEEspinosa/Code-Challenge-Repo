@@ -195,9 +195,9 @@ function groupAnagrams(strs) {
 
 //Top K Frequent Elements - Medium Apr 25, 2025
 
-//Given an integer array nums and an integer k, 
+//Given an integer array nums and an integer k,
 //return the k most frequent elements within the array.
-// The test cases are generated such that the answer 
+// The test cases are generated such that the answer
 // is always unique. You may return the output in any order
 
 function topKFrequent(nums, k) {
@@ -223,5 +223,46 @@ function topKFrequent(nums, k) {
     result.push(sorted[j][0]);
   }
 
+  return result;
+}
+
+//Encode and Decode Strings - Medium Apr 26, 2025
+
+//Design an algorithm to encode a list of strings
+// to a single string. The encoded string is then decoded
+// back to the original list of strings.
+// Please implement encode and decode
+
+/**
+ * @param {string[]} strs
+ * @returns {string}
+ */
+
+function encode(strs) {
+  let result = "";
+  for (let i = 0; i < strs.length; i++) {
+    result += strs[i] + "~";
+  }
+  return result;
+}
+
+/**
+ * @param {string} str
+ * @returns {string[]}
+ */
+
+function decode(str) {
+  let word = "";
+  let result = [];
+
+  for (let j = 0; j < str.length; j++) {
+    let char = str[j];
+    if (char !== "~") {
+      word += char;
+    } else {
+      result.push(word);
+      word = "";
+    }
+  }
   return result;
 }
