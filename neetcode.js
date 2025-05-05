@@ -266,3 +266,24 @@ function decode(str) {
   }
   return result;
 }
+
+//Valid Palindrome - easy May 5, 2025
+
+//dev note: but using two pointer method
+
+function isPalindrome(s) {
+  let arr = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  let left = 0;
+  let right = arr.length - 1;
+  console.log(arr);
+
+  while (left < right) {
+    if (arr[left] === arr[right]) {
+      left++;
+      right--;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
