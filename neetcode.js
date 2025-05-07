@@ -288,27 +288,55 @@ function isPalindrome(s) {
   return true;
 }
 
-
 //Two Integer Sum II - medium May 5, 2025 (two pointers)
 
 //Given an array of integers numbers that is sorted in non-decreasing order.
-// Return the indices (1-indexed) of two numbers, 
+// Return the indices (1-indexed) of two numbers,
 // [index1, index2], such that they add up to a given target number target and index1 < index2. Note that index1 and index2 cannot be equal, therefore you may not use the same element twice.
 // There will always be exactly one valid solution.
 
 function twoSum(numbers, target) {
-
   let left = 0;
-  let right = numbers.length-1;
+  let right = numbers.length - 1;
 
-  while (left < right){
-      if ((numbers[left] + numbers[right]) === target){
-          return [left+1, right+1]
-      }  
-      else if ((numbers[left] + numbers[right]) > target){
-          right--
-      } else {
-          left++
-      }
+  while (left < right) {
+    if (numbers[left] + numbers[right] === target) {
+      return [left + 1, right + 1];
+    } else if (numbers[left] + numbers[right] > target) {
+      right--;
+    } else {
+      left++;
+    }
   }
+}
+
+//Binary Search - easy May 7, 2025
+
+//You are given an array of distinct integers nums, 
+// sorted in ascending order, and an integer target.
+// Implement a function to search for target within nums. 
+// If it exists, then return its index, otherwise, return -1.
+//Your solution must run in O(logn) time.
+
+function search(nums, target) {
+  if (nums[0] === target) {
+    return 0;
+  }
+  if (nums[nums.length - 1] === target) {
+    return nums.length - 1;
+  }
+  let left = 0;
+  let right = nums.length - 1;
+  let middle = parseInt((left + right) / 2);
+
+  while (left < right) {
+    if (nums[middle] === target) {
+      return middle;
+    } else if (nums[middle] < target) {
+      left = middle += 1;
+    } else if (nums[middle] > target) {
+      right = middle -= 1;
+    }
+  }
+  return -1;
 }
