@@ -312,9 +312,9 @@ function twoSum(numbers, target) {
 
 //Binary Search - easy May 7, 2025
 
-//You are given an array of distinct integers nums, 
+//You are given an array of distinct integers nums,
 // sorted in ascending order, and an integer target.
-// Implement a function to search for target within nums. 
+// Implement a function to search for target within nums.
 // If it exists, then return its index, otherwise, return -1.
 //Your solution must run in O(logn) time.
 
@@ -339,4 +339,46 @@ function search(nums, target) {
     }
   }
   return -1;
+}
+
+// Valid Parentheses (again) - easy May 9, 2025
+
+function isValid(s) {
+  let pairs = {
+    "{": "}",
+    "[": "]",
+    "(": ")",
+  };
+
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (s[i] in pairs) {
+      stack.push(pairs[char]);
+      console.log(stack);
+    } else if (char === stack[stack.length - 1]) {
+      stack.pop();
+      console.log(stack);
+    } else {
+      return false;
+    }
+  }
+  return stack.length === 0 ? true : false;
+}
+
+//Reverse Linked List (again) - easy May 9, 2025
+
+function reverseList(head) {
+  let prev = null;
+  let curr = head;
+  let next;
+
+  while (curr) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
 }
