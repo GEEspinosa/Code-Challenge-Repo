@@ -387,44 +387,98 @@ function reverseList(head) {
 //two pointer solution = Time O(n) and Space O(1)
 
 function maxArea(heights) {
+  //maybe this problem would be best tackled using two pointers,
+  //one at the beg and one at the end of array.
 
-        //maybe this problem would be best tackled using two pointers,
-        //one at the beg and one at the end of array.
+  //declare three variables
+  //two for pointers
+  //one for heighest container
 
-        //declare three variables
-            //two for pointers
-            //one for heighest container
+  //iterate (while loop), calcuating height and comparing if it's highest
+  // then we move the smallest pointer inward to make new caluclation on next iteration
 
-        //iterate (while loop), calcuating height and comparing if it's highest
-        // then we move the smallest pointer inward to make new caluclation on next iteration
+  //return highest container after the iterating
+  //O(n)
 
-        //return highest container after the iterating
-        //O(n)
+  let left = 0;
+  let right = heights.length - 1;
+  let max = 0;
 
-        let left = 0;
-        let right = heights.length -1;
-        let max = 0
+  while (left < right) {
+    let lowest;
 
-        while (left < right) {
-            let lowest;
-
-            if (heights[left] <= heights[right]){
-                lowest = left;
-            } else {
-                lowest = right;  
-            }
-
-            let volume = (right - left) * heights[lowest]
-            
-            if (volume >= max) {
-                max = volume
-            }  
-
-            if (heights[left] <= heights[right]){
-                left++
-            } else {
-                right-- 
-            }
-        }
-        return max
+    if (heights[left] <= heights[right]) {
+      lowest = left;
+    } else {
+      lowest = right;
     }
+
+    let volume = (right - left) * heights[lowest];
+
+    if (volume >= max) {
+      max = volume;
+    }
+
+    if (heights[left] <= heights[right]) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+  return max;
+}
+
+
+//Minimum Stack - Medium May 13, 2025
+
+//Design a stack class that supports the push, pop, top, and getMin operations.
+// MinStack() initializes the stack object.
+// void push(int val) pushes the element val onto the stack.
+// void pop() removes the element on the top of the stack.
+// int top() gets the top element of the stack.
+// int getMin() retrieves the minimum element in the stack.
+// Each function should run in O(1) time.
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+    this.min = [];
+  }
+
+  /**
+   * @param {number} val
+   * @return {void}
+   */
+  push(val) {
+    if (this.stack.length === 0) {
+      this.min.push(val);
+    } else if (val <= this.min[this.min.length - 1]) {
+      this.min.push(val);
+    }
+    this.stack.push(val);
+  }
+
+  /**
+   * @return {void}
+   */
+  pop() {
+    let remove = this.stack.pop();
+    if (remove === this.min[this.min.length - 1]) {
+      this.min.pop();
+    }
+  }
+
+  /**
+   * @return {number}
+   */
+  top() {
+    return this.stack[this.stack.length - 1];
+  }
+
+  /**
+   * @return {number}
+   */
+  getMin() {
+    return this.min[this.min.length - 1];
+  }
+}
