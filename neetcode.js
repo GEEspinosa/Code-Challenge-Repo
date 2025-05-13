@@ -382,3 +382,49 @@ function reverseList(head) {
   }
   return prev;
 }
+
+//container with most water - medium May 13, 2025
+//two pointer solution = Time O(n) and Space O(1)
+
+function maxArea(heights) {
+
+        //maybe this problem would be best tackled using two pointers,
+        //one at the beg and one at the end of array.
+
+        //declare three variables
+            //two for pointers
+            //one for heighest container
+
+        //iterate (while loop), calcuating height and comparing if it's highest
+        // then we move the smallest pointer inward to make new caluclation on next iteration
+
+        //return highest container after the iterating
+        //O(n)
+
+        let left = 0;
+        let right = heights.length -1;
+        let max = 0
+
+        while (left < right) {
+            let lowest;
+
+            if (heights[left] <= heights[right]){
+                lowest = left;
+            } else {
+                lowest = right;  
+            }
+
+            let volume = (right - left) * heights[lowest]
+            
+            if (volume >= max) {
+                max = volume
+            }  
+
+            if (heights[left] <= heights[right]){
+                left++
+            } else {
+                right-- 
+            }
+        }
+        return max
+    }
