@@ -484,16 +484,16 @@ class MinStack {
 
 //Product of Array Except Self - medium May 14, 2025
 
-//Given an integer array nums, return an array output where 
+//Given an integer array nums, return an array output where
 //output[i] is the product of all the elements of nums except nums[i].
 // Each product is guaranteed to fit in a 32-bit integer.
-// Follow-up: Could you solve it in 
+// Follow-up: Could you solve it in
 // O(n) time without using the division operation?
 
 //Dev Note: using "prefix and suffix" strategy to create two arrays of integers
-//each holding the product of all prefix values or suffix values. 
+//each holding the product of all prefix values or suffix values.
 // Then a last loop that pushes the product of each at the same index into a result array
-//Time complexity should be O(n) 
+//Time complexity should be O(n)
 
 function productExceptSelf(nums) {
   let prefix = [];
@@ -523,4 +523,45 @@ function productExceptSelf(nums) {
   }
 
   return result;
+}
+
+//Best time to Buy and Sell Stock - easy May 14, 2025
+
+//You are given an integer array prices where prices[i] is the price of NeetCoin on the ith day.
+//You may choose a single day to buy one NeetCoin and choose a different day in the future to sell it.
+//Return the maximum profit you can achieve. You may choose to not make any transactions, in which case the profit would be 0.
+
+//Dev Note: two pointers starting from 0 and 1 of array, using while loop until one falls off
+// then another loop that picks up and finishes the last pointer,
+// iterating until the end while making product from current index to the last.
+// time complexity is O(n)
+
+function maxProfit(prices) {
+  let max = 0;
+  let buy = 0;
+  let sell = 0;
+
+  while (buy < prices.length && sell < prices.length) {
+    let profit = prices[sell] - prices[buy];
+    sell++;
+    if (profit > max) {
+      max = profit;
+    }
+
+    if (prices[buy] > prices[sell]) {
+      buy++;
+    } else if (prices[buy] > prices[buy + 1]) {
+      buy++;
+    }
+  }
+
+  if (sell >= prices.length) {
+    for (let k = buy; k < prices.length; k++) {
+      let profit = prices[sell - 1] - prices[k];
+      if (profit > max) {
+        max = profit;
+      }
+    }
+  }
+  return max;
 }
