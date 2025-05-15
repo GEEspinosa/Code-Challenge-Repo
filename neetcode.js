@@ -428,7 +428,6 @@ function maxArea(heights) {
   return max;
 }
 
-
 //Minimum Stack - Medium May 13, 2025
 
 //Design a stack class that supports the push, pop, top, and getMin operations.
@@ -481,4 +480,47 @@ class MinStack {
   getMin() {
     return this.min[this.min.length - 1];
   }
+}
+
+//Product of Array Except Self - medium May 14, 2025
+
+//Given an integer array nums, return an array output where 
+//output[i] is the product of all the elements of nums except nums[i].
+// Each product is guaranteed to fit in a 32-bit integer.
+// Follow-up: Could you solve it in 
+// O(n) time without using the division operation?
+
+//Dev Note: using "prefix and suffix" strategy to create two arrays of integers
+//each holding the product of all prefix values or suffix values. 
+// Then a last loop that pushes the product of each at the same index into a result array
+//Time complexity should be O(n) 
+
+function productExceptSelf(nums) {
+  let prefix = [];
+  let suffix = [];
+  let result = [];
+
+  for (let p = 0; p < nums.length; p++) {
+    let product = 1;
+    for (let n = p + 1; n < nums.length; n++) {
+      product = nums[n] * product;
+    }
+    prefix.push(product);
+  }
+
+  for (let s = nums.length - 1; s >= 0; s--) {
+    let product = 1;
+    for (let n = s - 1; n >= 0; n--) {
+      product = nums[n] * product;
+    }
+    suffix.push(product);
+  }
+
+  suffix.reverse();
+
+  for (let r = 0; r < nums.length; r++) {
+    result.push(prefix[r] * suffix[r]);
+  }
+
+  return result;
 }
