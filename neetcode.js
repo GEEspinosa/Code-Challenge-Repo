@@ -565,3 +565,48 @@ function maxProfit(prices) {
   }
   return max;
 }
+
+//3Sum - medium May 16, 2025
+
+//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] 
+//where nums[i] + nums[j] + nums[k] == 0, and the indices i, j and k are all distinct.
+//The output should not contain any duplicate triplets. 
+//You may return the output and the triplets in any order.
+
+//dev note: ordered int array then nested loop with inner while loop using two pointers, left and right.
+//Time Complexity O(n^2) and Space Complexity O(1)
+
+function threeSum(nums) {
+  nums.sort((a, b) => a - b);
+  let result = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let left = i + 1;
+    let right = nums.length - 1;
+    let remainder = -nums[i];
+
+    while (left < right) {
+      if (nums[left] + nums[right] < remainder) {
+        left++;
+      } else if (nums[left] + nums[right] > remainder) {
+        right--;
+      } else {
+        if (result.length === 0) {
+          result.push([nums[i], nums[left], nums[right]]);
+        }
+        if (
+          result[result.length - 1].toString() !==
+          [nums[i], nums[left], nums[right]].toString()
+        ) {
+          result.push([nums[i], nums[left], nums[right]]);
+        }
+        left++;
+        right--;
+      }
+    }
+    if (nums[i] === nums[i + 1]) {
+      i++;
+    }
+  }
+  return result;
+}
