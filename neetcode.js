@@ -568,9 +568,9 @@ function maxProfit(prices) {
 
 //3Sum - medium May 16, 2025
 
-//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] 
+//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]]
 //where nums[i] + nums[j] + nums[k] == 0, and the indices i, j and k are all distinct.
-//The output should not contain any duplicate triplets. 
+//The output should not contain any duplicate triplets.
 //You may return the output and the triplets in any order.
 
 //dev note: ordered int array then nested loop with inner while loop using two pointers, left and right.
@@ -609,4 +609,44 @@ function threeSum(nums) {
     }
   }
   return result;
+}
+
+//Evaluate Reverse Polish Notation - medium May 17, 2025
+
+//You are given an array of strings tokens that represents 
+//a valid arithmetic expression in Reverse Polish Notation.
+//Return the integer that represents the evaluation of the expression.
+//The operands may be integers or the results of other operations.
+//The operators include '+', '-', '*', and '/'.
+//Assume that division between integers always truncates toward zero.
+
+//dev note: use a stack and one iteration through the string array. 
+//make sure to have the conditions checking for operator strings before pushing numerals.
+
+function evalRPN(tokens) {
+  let stack = [];
+  let p;
+  let n;
+
+  for (let i = 0; i < tokens.length; i++) {
+    let val = tokens[i];
+
+    if (val === "+") {
+      stack.push(stack.pop() + stack.pop());
+    } else if (val === "-") {
+      let p = stack.pop();
+      let n = stack.pop();
+      stack.push(n - p);
+    } else if (val === "*") {
+      stack.push(stack.pop() * stack.pop());
+    } else if (val === "/") {
+      let p = stack.pop();
+      let n = stack.pop();
+      stack.push(Math.trunc(n / p));
+    } else {
+      stack.push(parseInt(val));
+    }
+  }
+
+  return stack[0] ? stack[0] : 0;
 }
