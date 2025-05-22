@@ -613,14 +613,14 @@ function threeSum(nums) {
 
 //Evaluate Reverse Polish Notation - medium May 17, 2025
 
-//You are given an array of strings tokens that represents 
+//You are given an array of strings tokens that represents
 //a valid arithmetic expression in Reverse Polish Notation.
 //Return the integer that represents the evaluation of the expression.
 //The operands may be integers or the results of other operations.
 //The operators include '+', '-', '*', and '/'.
 //Assume that division between integers always truncates toward zero.
 
-//dev note: use a stack and one iteration through the string array. 
+//dev note: use a stack and one iteration through the string array.
 //make sure to have the conditions checking for operator strings before pushing numerals.
 
 function evalRPN(tokens) {
@@ -649,4 +649,30 @@ function evalRPN(tokens) {
   }
 
   return stack[0] ? stack[0] : 0;
+}
+
+//Longest Substring Without Repeating Characters - medium May 22, 2025
+//Given a string s, find the length of the longest substring without duplicate characters.
+//A substring is a contiguous sequence of characters within a string.
+
+//dev note: sliding window approach using two pointers to add, compare and remove elements into hash Set.
+// Time complexity of O(n) and space complexity of O(m)
+
+function lengthOfLongestSubstring(s) {
+  let hash = new Set();
+  let l = 0;
+  let r = 0;
+  let res = 0;
+
+  while (r < s.length) {
+    if (hash.has(s[r])) {
+      hash.delete(s[l]);
+      l++;
+    } else {
+      hash.add(s[r]);
+      res = Math.max(res, r - l + 1);
+      r++;
+    }
+  }
+  return res;
 }
