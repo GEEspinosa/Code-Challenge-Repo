@@ -1573,3 +1573,25 @@ var majorityElement = function (nums) {
     }
   }
 };
+
+//268. Missing Number - Easy May 25, 2025
+
+//Given an array nums containing n distinct numbers in the range [0, n], 
+//return the only number in the range that is missing from the array.
+
+//dev note: sort, iterate and compare with counter, 
+//without returning, add a number at end of array
+
+var missingNumber = function (nums) {
+  nums.sort((a, b) => a - b);
+  let compare = 0;
+  for (let i = 0; i < nums.length; i++) {
+    let int = nums[i];
+    if (int === compare) {
+      compare++;
+    } else {
+      return compare++;
+    }
+  }
+  return nums[nums.length - 1] + 1;
+};
