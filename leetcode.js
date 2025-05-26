@@ -1498,12 +1498,12 @@ MyQueue.prototype.empty = function () {
   return this.inStack.length === 0 && this.outStack.length === 0;
 };
 
-//Plus One - Easy May 25, 2025
+//66. Plus One - Easy May 25, 2025
 
-//You are given a large integer represented as an integer array digits, 
-//where each digits[i] is the ith digit of the integer. 
-//The digits are ordered from most significant to least significant in left-to-right order. 
-//The large integer does not contain any leading 0's. Increment the large integer by one and return 
+//You are given a large integer represented as an integer array digits,
+//where each digits[i] is the ith digit of the integer.
+//The digits are ordered from most significant to least significant in left-to-right order.
+//The large integer does not contain any leading 0's. Increment the large integer by one and return
 //the resulting array of digits.
 
 //Dev Note: iterate backwards and alter integer array in place
@@ -1522,4 +1522,54 @@ var plusOne = function (digits) {
     }
   }
   return digits;
+};
+
+//169. Majority Element - Easy May 25, 2025
+
+//Given an array nums of size n, return the majority element.
+//The majority element is the element that appears more than ⌊n / 2⌋ times.
+//You may assume that the majority element always exists in the array.
+
+//Dev note: this is first attempt using hash table
+
+var majorityElement = function (nums) {
+  let hash = {};
+  for (let i = 0; i < nums.length; i++) {
+    let val = nums[i];
+    if (val in hash) {
+      hash[val]++;
+    } else {
+      hash[val] = 1;
+    }
+  }
+
+  let instances = Object.values(hash);
+  let mostInstance = instances.sort((a, b) => a - b).pop();
+
+  for (let prop in hash) {
+    if (hash[prop] === mostInstance) {
+      return Number(prop);
+    }
+  }
+};
+
+//dev note: next attempt, simplified:
+
+var majorityElement = function (nums) {
+  if (nums.length === 1) {
+    return nums[0];
+  }
+
+  let hash = {};
+  for (let i = 0; i < nums.length; i++) {
+    let val = nums[i];
+    if (val in hash) {
+      hash[val]++;
+      if (hash[val] > nums.length / 2) {
+        return val;
+      }
+    } else {
+      hash[val] = 1;
+    }
+  }
 };
