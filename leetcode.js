@@ -1436,8 +1436,8 @@ var hasCycle = function (head) {
 
 //232. Implement Queue using Stacks
 
-//Implement a first in first out (FIFO) queue using only two stacks. 
-// The implemented queue should support all 
+//Implement a first in first out (FIFO) queue using only two stacks.
+// The implemented queue should support all
 // the functions of a normal queue (push, peek, pop, and empty).
 // Implement the MyQueue class: void push(int x) Pushes element x to the back of the queue.
 // int pop() Removes the element from the front of the queue and returns it.
@@ -1496,4 +1496,30 @@ MyQueue.prototype.peek = function () {
  */
 MyQueue.prototype.empty = function () {
   return this.inStack.length === 0 && this.outStack.length === 0;
+};
+
+//Plus One - Easy May 25, 2025
+
+//You are given a large integer represented as an integer array digits, 
+//where each digits[i] is the ith digit of the integer. 
+//The digits are ordered from most significant to least significant in left-to-right order. 
+//The large integer does not contain any leading 0's. Increment the large integer by one and return 
+//the resulting array of digits.
+
+//Dev Note: iterate backwards and alter integer array in place
+// time O(n) and space O(1)
+
+var plusOne = function (digits) {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] === 9) {
+      digits[i] = 0;
+      if (i === 0) {
+        digits.unshift(1);
+      }
+    } else {
+      digits[i] += 1;
+      break;
+    }
+  }
+  return digits;
 };
