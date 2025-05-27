@@ -1576,10 +1576,10 @@ var majorityElement = function (nums) {
 
 //268. Missing Number - Easy May 25, 2025
 
-//Given an array nums containing n distinct numbers in the range [0, n], 
+//Given an array nums containing n distinct numbers in the range [0, n],
 //return the only number in the range that is missing from the array.
 
-//dev note: sort, iterate and compare with counter, 
+//dev note: sort, iterate and compare with counter,
 //without returning, add a number at end of array
 
 var missingNumber = function (nums) {
@@ -1594,4 +1594,32 @@ var missingNumber = function (nums) {
     }
   }
   return nums[nums.length - 1] + 1;
+};
+
+//387. First Unique Character in a String - Easy May 27, 2025
+
+//Given a string s, find the first non-repeating character 
+//in it and return its index. 
+//If it does not exist, return -1.
+
+
+//dev note: hashtable and two loops, Time O(n)
+
+var firstUniqChar = function (s) {
+  let hash = {};
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (char in hash) {
+      hash[char]++;
+    } else {
+      hash[char] = 1;
+    }
+  }
+  for (let i = 0; i < s.length; i++) {
+    let val = s[i];
+    if (hash[val] === 1) {
+      return i;
+    }
+  }
+  return -1;
 };
